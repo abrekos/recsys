@@ -9,8 +9,8 @@ from ..log import app_logger, setup_logging
 from ..settings import ServiceConfig
 from .exception_handlers import add_exception_handlers
 from .middlewares import add_middlewares
-from .views import add_views
 from .models.models import models
+from .views import add_views
 
 __all__ = ("create_app",)
 

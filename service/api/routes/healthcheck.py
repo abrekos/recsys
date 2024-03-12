@@ -9,11 +9,7 @@ router = APIRouter()
 @router.get(
     "",
     dependencies=[Depends(bearer_auth)],
-    responses={
-        200: {
-            "model": HealthStatus
-        }
-    },
+    responses={200: {"model": HealthStatus}},
 )
 async def health() -> HealthStatus:
     return HealthStatus(status="ok")

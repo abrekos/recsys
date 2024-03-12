@@ -1,4 +1,3 @@
-from http import HTTPStatus
 from typing import Sequence
 
 
@@ -8,7 +7,7 @@ class AppError(Exception):
         status_code: int,
         error_key: str,
         error_message: str = "",
-        error_loc: Sequence[str] | None = None,
+        error_loc: Sequence[str] = None,
     ) -> None:
         self.error_key = error_key
         self.error_message = error_message

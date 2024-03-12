@@ -1,6 +1,4 @@
 # pylint: disable=redefined-outer-name
-from os import getenv
-
 import pytest
 from fastapi import FastAPI
 from starlette.testclient import TestClient
@@ -40,4 +38,4 @@ def client_with_auth(app: FastAPI) -> TestClient:
 
 @pytest.fixture
 def test_bearer_token() -> str:
-    return getenv("BEARER_KEY")
+    return "dfkjvndfkvnslaeriosuhvibfgbjfg"

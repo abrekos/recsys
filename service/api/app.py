@@ -10,6 +10,7 @@ from ..settings import ServiceConfig
 from .exception_handlers import add_exception_handlers
 from .middlewares import add_middlewares
 from .views import add_views
+from .models.models import models
 
 __all__ = ("create_app",)
 
@@ -35,6 +36,7 @@ def create_app(config: ServiceConfig) -> FastAPI:
 
     app = FastAPI(debug=False)
     app.state.k_recs = config.k_recs
+    app.state.models = models
 
     add_views(app)
     add_middlewares(app)

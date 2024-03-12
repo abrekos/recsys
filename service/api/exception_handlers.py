@@ -11,7 +11,7 @@ from service.log import app_logger
 from service.models import Error
 from service.response import create_response, server_error
 
-from .exceptions import AppException
+from .errors.app import AppError
 
 
 async def default_error_handler(
@@ -49,7 +49,7 @@ async def validation_error_handler(
 
 async def app_exception_handler(
     request: Request,
-    exc: AppException,
+    exc: AppError,
 ) -> JSONResponse:
     errors = [
         Error(
@@ -66,5 +66,5 @@ def add_exception_handlers(app: FastAPI) -> None:
     app.add_exception_handler(HTTPException, http_error_handler)
     app.add_exception_handler(ValidationError, validation_error_handler)
     app.add_exception_handler(RequestValidationError, validation_error_handler)
-    app.add_exception_handler(AppException, app_exception_handler)
+    app.add_exception_handler(AppError, app_exception_handler)
     app.add_exception_handler(Exception, default_error_handler)

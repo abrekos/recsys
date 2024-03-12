@@ -1,0 +1,79 @@
+openapi: 3.0.0
+servers: []
+info:
+  description: Сервис рекомендаций ИТМО
+  version: "1.0.0"
+  title: Сервис рекомендаций
+tags:
+  - name: health
+    description: Проверка состояния сервиса
+  - name: recommendations
+    description: Сервис рекомендаций
+paths:
+  /health:
+    get:
+      tags:
+        - health
+      summary: Состояние сервиса
+      description: |
+        Возвращает состояние сервиса. Должно быть ok
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+        "500":
+          description: Внутренняя ошибка сервера
+  /reco/{model}/{user_id}:
+    get:
+      tags:
+        - recommendations
+      summary: Получить рекомендации
+      description: |
+        Возвращает рекомендации для указанного пользователя
+      parameters:
+        - name: model
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecoResponse"
+        "500":
+          description: Внутренняя ошибка сервера
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          example: ok
+    RecoResponse:
+      required:
+        - user_id
+        - items
+      properties:
+        user_id:
+          type: integer
+          example: 423425
+        items:
+          type: array
+          items:
+            type: integer
+          example: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      type: object

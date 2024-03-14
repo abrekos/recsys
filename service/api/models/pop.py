@@ -13,14 +13,12 @@ from service.api.types.model import BaseModel
 
 class PopModel(BaseModel):
     def __init__(self, dataset_path: Path, backbone_model: Any):
-        self._dataset, self._item_id_map = self._load_dataset(dataset_path)
-        self._model: PopularModel = backbone_model
+        if os.path.isfile(dataset_path):        
+            self._dataset, self._item_id_map = self._load_dataset(dataset_path)
+            self._model: PopularModel = backbone_model
 
     @staticmethod
     def _load_dataset(dataset_path: Path) -> Tuple[Dataset, dict]:
-        if not os.path.isfile(dataset_path):
-            return [None, [None, None]]
-
         interactions_df = pd.read_csv(dataset_path)
         interactions_df.rename(columns={"last_watch_dt": Columns.Datetime, "total_dur": Columns.Weight}, inplace=True)
 

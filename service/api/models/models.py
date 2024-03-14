@@ -10,13 +10,15 @@ ANN_MODEL_PATH = "weights/ann.pkl"
 POP_MODEL_PATH = "weights/pop.pkl"
 DATASET_PATH = "kion_train/interactions.csv"
 
-models = {
-    "simple_list_model": SimpleListModel(),
-    "user_knn": UserKnn(
-        backbone_model=load("weights/userknn.pkl"),
-    ),
-    "als_model": ANN(
-        backbone_model=load(ANN_MODEL_PATH),
-        popular_model=PopModel(dataset_path=DATASET_PATH, backbone_model=load(POP_MODEL_PATH)),
-    ),
-}
+try:
+    models = {
+        "simple_list_model": SimpleListModel(),
+        "user_knn": UserKnn(
+            backbone_model=load("weights/userknn.pkl"),
+        ),
+        "als_model": ANN(
+            backbone_model=load(ANN_MODEL_PATH),
+            popular_model=PopModel(dataset_path=DATASET_PATH, backbone_model=load(POP_MODEL_PATH)),
+        ),
+    }
+except:

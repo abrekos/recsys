@@ -68,9 +68,7 @@ class UserToItemNGTRecommender:
 
         return out
 
-    def _get_item_list_from_index(
-        self, user_ids: InternalIds, top_n: int, item_ids: Sequence[InternalIds] = None
-    ):
+    def _get_item_list_from_index(self, user_ids: InternalIds, top_n: int, item_ids: Sequence[InternalIds] = None):
         user_vectors = self._user_vectors[user_ids, :]
         available_items = item_ids
         ids = self._get_similar(query=user_vectors, top_n=top_n)

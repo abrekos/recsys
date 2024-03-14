@@ -1,7 +1,7 @@
 from rectools.tools import UserToItemAnnRecommender
 
-from service.api.types.model import BaseModel
 from service.api.models.pop import PopModel
+from service.api.types.model import BaseModel
 
 
 class ANN(BaseModel):

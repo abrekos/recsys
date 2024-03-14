@@ -1,5 +1,5 @@
 import itertools
-from typing import Any, Hashable, Sequence, Set
+from typing import Hashable, Sequence, Set
 
 import ngtpy
 import numpy as np
@@ -12,8 +12,8 @@ class UserToItemNGTRecommender:
         self,
         user_vectors: np.ndarray,
         item_vectors: np.ndarray,
-        user_id_map: IdMap | dict[str, str],
-        item_id_map: IdMap | dict[str, str],
+        user_id_map: IdMap,
+        item_id_map: IdMap,
     ):
         self._user_vectors = user_vectors
         self._item_vectors = item_vectors
@@ -46,8 +46,8 @@ class UserToItemNGTRecommender:
     def _truncate_item_list(
         top_n: int,
         item_arrays: Sequence[InternalIds],
-        available_items: Sequence[InternalIds] | None = None,
-        self_indices: Sequence[InternalIds] | None = None,
+        available_items: Sequence[InternalIds] = None,
+        self_indices: Sequence[InternalIds] = None,
     ) -> Sequence[InternalIds]:
         out = []
         if available_items is not None:
@@ -69,8 +69,8 @@ class UserToItemNGTRecommender:
         return out
 
     def _get_item_list_from_index(
-        self, user_ids: InternalIds, top_n: int, item_ids: Sequence[InternalIds] | None = None
-    ) -> Sequence[Sequence[Hashable] | np.ndarray]:
+        self, user_ids: InternalIds, top_n: int, item_ids: Sequence[InternalIds] = None
+    ):
         user_vectors = self._user_vectors[user_ids, :]
         available_items = item_ids
         ids = self._get_similar(query=user_vectors, top_n=top_n)
@@ -83,8 +83,8 @@ class UserToItemNGTRecommender:
         return [[out[0] for out in result]]
 
     def get_item_list_for_user(
-        self, user_id: ExternalId, top_n: int = 10, item_ids: ExternalIds | None = None
-    ) -> Sequence[Hashable] | np.ndarray[Any, Any]:
+        self, user_id: ExternalId, top_n: int = 10, item_ids: ExternalIds = None
+    ) -> Sequence[Hashable]:
         user_id_ = self._user_id_map.convert_to_internal([user_id])
         item_ids_ = None
         if item_ids is not None:

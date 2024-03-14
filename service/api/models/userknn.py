@@ -4,7 +4,6 @@ from copy import deepcopy
 import numpy as np
 import pandas as pd
 import scipy as sp
-
 from implicit.nearest_neighbours import ItemItemRecommender
 from rectools.dataset import Dataset
 from rectools.models import PopularModel

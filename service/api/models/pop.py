@@ -19,7 +19,7 @@ class PopModel(BaseModel):
     @staticmethod
     def _load_dataset(dataset_path: Path) -> Tuple[Dataset, dict]:
         if not os.path.isfile(dataset_path):
-            return [None, None]
+            return [None, [None, None]]
 
         interactions_df = pd.read_csv(dataset_path)
         interactions_df.rename(columns={"last_watch_dt": Columns.Datetime, "total_dur": Columns.Weight}, inplace=True)

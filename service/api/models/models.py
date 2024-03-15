@@ -22,7 +22,7 @@ models = {
     "ranking_pop": UserKnn(
         backbone_model=load("weights/userknn.pkl"),
     ),
-    "als_model": ANN(
+    "user_knn": ANN(
         backbone_model=load(ANN_MODEL_PATH),
         popular_model=PopModel(dataset_path=DATASET_PATH, backbone_model=load(POP_MODEL_PATH)),
     ),

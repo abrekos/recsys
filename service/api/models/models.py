@@ -19,10 +19,10 @@ XGBOOST_RECOS = "weights/xgb.json"
 
 models = {
     "simple_list_model": SimpleListModel(),
-    "ranking_pop": UserKnn(
+    "user_knn": UserKnn(
         backbone_model=load("weights/userknn.pkl"),
     ),
-    "user_knn": ANN(
+    "als_model": ANN(
         backbone_model=load(ANN_MODEL_PATH),
         popular_model=PopModel(dataset_path=DATASET_PATH, backbone_model=load(POP_MODEL_PATH)),
     ),

@@ -1,5 +1,4 @@
 import typing as tp
-from http import HTTPStatus
 
 
 class AppException(Exception):
@@ -20,7 +19,7 @@ class AppException(Exception):
 class UserNotFoundError(AppException):
     def __init__(
         self,
-        status_code: int = HTTPStatus.NOT_FOUND,
+        status_code: int = 404,
         error_key: str = "user_not_found",
         error_message: str = "User is unknown",
         error_loc: tp.Optional[tp.Sequence[str]] = None,

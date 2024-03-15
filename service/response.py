@@ -1,6 +1,5 @@
 import json
 import typing as tp
-from http import HTTPStatus
 
 import orjson
 from fastapi.responses import JSONResponse
@@ -55,4 +54,4 @@ def create_response(
 
 
 def server_error(errors: tp.List[Error]) -> JSONResponse:
-    return create_response(HTTPStatus.INTERNAL_SERVER_ERROR, errors=errors)
+    return create_response(500, errors=errors)
